@@ -1,0 +1,61 @@
+<h1> Formulario <small> de registro</small> </h1>
+<hr>
+
+<!--boton de regreso a tabla-->
+<div class="text-right mr-5">
+  <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" routerLink="/Tabla" >
+    <mat-icon> arrow_left </mat-icon>
+    Regresar
+  </button>
+</div>
+
+
+<form class="formulario" [formGroup]="forma" (ngSubmit)="guardar()" novalidate="novalidate" >
+    <!--  Entrada de nombre-->
+    <div class="row mb-3">
+      <mat-form-field class="example-container" appearance="outline">
+        <mat-label>Nombre completo :</mat-label>
+        <input matInput placeholder="Nombre completo" formControlName="nombre" [(ngModel)]="persona.nombre" >
+<!--        Mensajes de error en el nombre-->
+        <mat-error *ngIf="forma.controls['nombre'].errors?.required" class="mb-1">Tu nombre es requerido</mat-error>
+        <mat-error *ngIf="!forma.controls['nombre'].errors?.minlenght" >Mínimo cinco letras en tu nombre</mat-error>
+
+      </mat-form-field>
+    </div>
+
+  <!--  Entrada de curp-->
+    <div class="row mb-3">
+      <mat-form-field class="example-container" appearance="outline">
+        <mat-label>CURP :</mat-label>
+        <input matInput placeholder="Clave Única de Registro de Población" formControlName="curp" [(ngModel)]="persona.curp" >
+<!--          Mensajes de error en el curp-->
+        <mat-error *ngIf="forma.controls['curp'].errors?.required" class="mb-1">Tu CURP es requerido</mat-error>
+        <mat-error *ngIf="!forma.controls['curp'].errors?.minlenght" >Ingresa un CURP válido</mat-error>
+      </mat-form-field>
+    </div>
+
+  <!--  Entrada de edad-->
+    <div class="row mb-3">
+      <mat-form-field class="example-container" appearance="outline">
+        <mat-label>Edad :</mat-label>
+        <input matInput placeholder="Tu edad" type="number" min="18" max="130" formControlName="edad" [(ngModel)]="persona.edad">
+      </mat-form-field>
+    </div>
+
+  <!--  Seleccionar sexo-->
+    <div class="row mb-3">
+      <mat-radio-group aria-label="Select an option" formControlName="sexo" [(ngModel)]="persona.sexo">
+        <mat-radio-button value="hombre">Hombre</mat-radio-button>
+        <mat-radio-button value="mujer">Mujer</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  <!--  boton de guardar-->
+    <div class="text-center">
+      <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" type="submit" [disabled]="!forma.valid">
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+    </div>
+</form>
+

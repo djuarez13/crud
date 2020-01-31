@@ -1,0 +1,44 @@
+<h1> Registro <small>de personas</small> </h1>
+<hr>
+  <div class="text-right mr-5 ">
+    <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" routerLink="/formulario/nuevo" >
+      <mat-icon>person_add</mat-icon>
+      Agregar
+    </button>
+  </div>
+
+<div class="container mt-4">
+  <table class="table table-dark">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">CURP</th>
+      <th scope="col">Edad</th>
+      <th scope="col">Sexo</th>
+      <th scope="col">Tools</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let persona of personas, let i = index">
+      <th scope="row"> {{i +1}} </th>
+      <td> {{persona.nombre}} </td>
+      <td> {{persona.curp}} </td>
+      <td> {{persona.edad}} </td>
+      <td> {{persona.sexo}} </td>
+      <td>
+        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon"  [routerLink]="['/formulario', persona.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" (click)="borrar(persona,i )">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+
