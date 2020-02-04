@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PersonaModel} from '../../models/persona.model';
 import {PersonasService} from '../../services/personas.service';
+import {MatTableDataSource} from '@angular/material/table';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,6 +12,8 @@ import Swal from 'sweetalert2';
 export class TablaComponent implements OnInit {
 
   personas: PersonaModel [] = [];
+  displayedColumns: string[] = ['no', 'nombre', 'curp', 'edad', 'sexo', 'acciones'];
+  dataSource = new MatTableDataSource<PersonaModel>();
 
   constructor(  private personaService: PersonasService ) { }
 
@@ -19,8 +22,13 @@ export class TablaComponent implements OnInit {
     this.personaService.getPersonas().subscribe( resp => {
       console.log(resp);
       this.personas = resp;
+      this.dataSource.data = this.personas;
+
     });
   }
+
+
+
 
   borrar(persona: PersonaModel, i: number){
     Swal.fire({
@@ -44,4 +52,7 @@ export class TablaComponent implements OnInit {
     }) ;
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
